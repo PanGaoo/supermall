@@ -1,20 +1,16 @@
 <template>
   <div id="home">
     <nav-bar class="home-name"><div slot="center">购物街</div></nav-bar>
-    <swiper>
-      <swiper-item v-for="(item,index) in banners" :key="index">
-        <a :href="item.link">
-          <img :src="item.image" alt="">
-        </a>
-      </swiper-item>
-    </swiper>
+    <Home-swiper :banners="banners"></Home-swiper>
+    <home-recommend-view :recommends="recommends"></home-recommend-view>
   </div>
 </template>
 
 <script>
-import NavBar from "components/common/navbar/NavBar.vue";
+import NavBar from "components/common/navbar/NavBar";
+import HomeSwiper from "./childComps/HomeSwiper"
+import HomeRecommendView from "./childComps/HomeRecommendView"
 import { getHomeMultidata } from "network/home";
-import {Swiper, SwiperItem} from "components/common/swiper"
 
 export default {
   data() {
@@ -25,12 +21,12 @@ export default {
   },
   components: {
     NavBar,
-    Swiper,
-    SwiperItem
+    HomeSwiper,
+    HomeRecommendView
   },
   created() {
     //请求多个数据
-    getHomeMultidata().then(res => {
+    getHomeMultidata().then((res) => {
       //console.log(res);
       this.banners = res.data.banner.list;
       this.recommends = res.data.recommend.list;
