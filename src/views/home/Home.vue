@@ -20,8 +20,12 @@
         @tabClick="tabClick"
       ></tab-control>
       <goods-list :goods="showGoods"></goods-list>
-      <div style="height: 50px;" slot="loading">
-        <div><van-loading style="background-color: #f2f2f2;" size="20px">加载中...</van-loading></div>
+      <div style="height: 50px" slot="loading">
+        <div>
+          <van-loading style="background-color: #f2f2f2" size="20px"
+            >加载中...</van-loading
+          >
+        </div>
       </div>
     </van-list>
   </div>
@@ -52,7 +56,7 @@ export default {
       currentType: "pop",
       loading: false,
       finished: false,
-      error:false,
+      error: false,
     };
   },
   components: {
@@ -110,13 +114,18 @@ export default {
         this.goods[type].page += 1;
       });
     },
-    onLoad() {
-      // this.getHomeGoods(this.currentType);
-      // // 加载状态结束
-      // setTimeout(() => {
-      //   this.loading = false;
-      // }, 5000);
-      // this.finished = true;
+    async onLoad() {
+      //请求数据
+      const page = this.goods[this.currentType].page + 1;
+      const res = await getHomeGoods(this.currentType, page);
+      this.goods[this.currentType].list.push(...res.data.list);
+      this.goods[this.currentType].page += 1;
+      //请求完成将加载状态设置为等待加载
+      this.loading = false;
+      //加载状态结束判断数据是否全部加载完毕，如果全部加载完毕则不会再触发加载事件
+      if (this.goods[this.currentType].page === 3) {
+        this.finished = true;
+      }
     },
   },
 };

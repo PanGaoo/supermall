@@ -1,12 +1,12 @@
 <template>
   <div class="swiper">
     <swiper :options="swiperOptions">
-      <swiper-slide v-for="(item, index) in banners" :key="index">
-        <a :href="item.link">
+      <swiper-slide v-for="(item, index) in topImages" :key="index">
+        <div class="lunbo">
           <div class="imgDiv">
-            <img :src="item.image" alt="" />
+            <img :src="item" alt="" />
           </div>
-        </a>
+        </div>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
@@ -21,9 +21,8 @@ export default {
     return {
       swiperOptions: {
         pagination: {
-          el: '.swiper-pagination',  //与slot="pagination"处 class 一致
+          el: ".swiper-pagination", //与slot="pagination"处 class 一致
           clickable: true, //轮播按钮支持点击
-          dynamicBullets: true,
         },
         autoplay: {
           delay: 3000, //自动切换的时间间隔，单位ms
@@ -32,17 +31,17 @@ export default {
       },
     };
   },
-  components: {
-    swiper,
-    swiperSlide,
-  },
   props: {
-    banners: {
+    topImages: {
       type: Array,
       default() {
         return [];
       },
     },
+  },
+  components: {
+    swiper,
+    swiperSlide,
   },
 };
 </script>
@@ -53,6 +52,12 @@ img {
   height: auto;
   max-width: 100%;
   max-height: 100%;
+}
+.lunbo {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .imgDiv {
   display: flex;
