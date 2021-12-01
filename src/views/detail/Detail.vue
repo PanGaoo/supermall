@@ -105,12 +105,13 @@ export default {
       product.iid = this.iid;
       product.count = 1;
       this.$store.commit("addCart", product);
+      this.$toast.success({
+          message:'添加成功',
+        })
     },
   },
   created() {
-    this.active = 0;
     // 1. 获取传入的商品id
-    console.log(this.$route.params.id);
     this.iid = this.$route.params.id;
     // 2. 根据id请求详情数据
     getDetail(this.iid).then((res) => {

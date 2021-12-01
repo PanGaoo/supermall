@@ -121,14 +121,11 @@ export default {
       //请求完成将加载状态设置为等待加载
       this.loading = false;
       //加载状态结束判断数据是否全部加载完毕，如果全部加载完毕则不会再触发加载事件
-      if (this.goods[this.currentType].page === 3) {
+      if (this.goods[this.currentType].page === 5) {
         this.finished = true;
       }
     },
-  },
-  meta: {
-    keepAlive: true, //不需要被缓存的组件
-  },
+  }
 };
 </script>
 
