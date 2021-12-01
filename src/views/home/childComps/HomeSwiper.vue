@@ -4,7 +4,7 @@
       <swiper-slide v-for="(item, index) in banners" :key="index">
         <a :href="item.link">
           <div class="imgDiv">
-            <img :src="item.image" alt="" />
+            <img :src="item.image" v-lazy="item.image"/>
           </div>
         </a>
       </swiper-slide>

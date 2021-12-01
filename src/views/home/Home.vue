@@ -1,34 +1,34 @@
 <template>
-  <div id="home">
-    <nav-bar class="home-name"><div slot="center">购物街</div></nav-bar>
-    <van-list
-      v-model="loading"
-      :finished="finished"
-      :error.sync="error"
-      error-text="请求失败，点击重新加载"
-      finished-text="没有更多了"
-      :immediate-check="false"
-      @load="onLoad"
-      style="margin-bottom: 49px"
-    >
-      <Home-swiper :banners="banners"></Home-swiper>
-      <home-recommend-view :recommends="recommends"></home-recommend-view>
-      <home-featrue-view></home-featrue-view>
-      <tab-control
-        :titles="['流行', '新款', '精选']"
-        class="tab-control"
-        @tabClick="tabClick"
-      ></tab-control>
-      <goods-list :goods="showGoods"></goods-list>
-      <div style="height: 50px" slot="loading">
-        <div>
-          <van-loading style="background-color: #f2f2f2" size="20px"
-            >加载中...</van-loading
-          >
+    <div id="home">
+      <van-nav-bar title="购物街" z-index="99" fixed placeholder />
+      <van-list
+        v-model="loading"
+        :finished="finished"
+        :error.sync="error"
+        error-text="请求失败，点击重新加载"
+        finished-text="没有更多了"
+        :immediate-check="false"
+        @load="onLoad"
+        style="margin-bottom: 49px"
+      >
+        <Home-swiper :banners="banners"></Home-swiper>
+        <home-recommend-view :recommends="recommends"></home-recommend-view>
+        <home-featrue-view></home-featrue-view>
+        <tab-control
+          :titles="['流行', '新款', '精选']"
+          class="tab-control"
+          @tabClick="tabClick"
+        ></tab-control>
+        <goods-list :goods="showGoods"></goods-list>
+        <div style="height: 50px" slot="loading">
+          <div>
+            <van-loading style="background-color: #f2f2f2" size="20px"
+              >加载中...</van-loading
+            >
+          </div>
         </div>
-      </div>
-    </van-list>
-  </div>
+      </van-list>
+    </div>
 </template>
 
 <script>
@@ -36,7 +36,6 @@ import HomeSwiper from "./childComps/HomeSwiper";
 import HomeRecommendView from "./childComps/HomeRecommendView";
 import HomeFeatrueView from "./childComps/HomeFeatrueView";
 
-import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 
@@ -60,7 +59,6 @@ export default {
     };
   },
   components: {
-    NavBar,
     HomeSwiper,
     HomeRecommendView,
     HomeFeatrueView,
@@ -127,6 +125,9 @@ export default {
         this.finished = true;
       }
     },
+  },
+  meta: {
+    keepAlive: true, //不需要被缓存的组件
   },
 };
 </script>

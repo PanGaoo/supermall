@@ -1,11 +1,14 @@
 <template>
-  <div style="border-bottom: 4px solid #eee" v-if="shop">
+  <div
+    style="border-bottom: 4px solid #eee"
+    v-if="Object.keys(shop).length !== 0"
+  >
     <div class="shopName">
       <van-image
         round
         width="40px"
         height="40px"
-        :src="shop.logo"
+        v-lazy="shop.logo"
         style="border: 1px solid rgba(0, 0, 0, 0.1)"
       />
       <span style="margin-left: 15px; font-size: 14px">{{ shop.name }}</span>

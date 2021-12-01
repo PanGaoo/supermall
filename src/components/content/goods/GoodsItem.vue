@@ -1,12 +1,13 @@
 <template>
   <div class="goods-item" @click="itemClick">
-    <img :src="goodsItem.show.img" alt="" />
+    <img v-if="this.goodsItem.show" v-lazy="this.goodsItem.show.img" />
+    <img v-else v-lazy="this.goodsItem.image" />
     <div class="goods-info">
       <p>{{ goodsItem.title }}</p>
       <div>
         <span class="price">{{ goodsItem.price }}</span
         >&nbsp;&nbsp;&nbsp;
-        <img src="~assets/img/common/collect.svg"/>
+        <img src="~assets/img/common/collect.svg" />
         <span class="cfav">{{ goodsItem.cfav }}</span>
       </div>
     </div>
@@ -15,9 +16,8 @@
 
 <script>
 export default {
-  data(){
-    return{
-    }
+  data() {
+    return {};
   },
   props: {
     goodsItem: {
@@ -27,11 +27,11 @@ export default {
       },
     },
   },
-  methods:{
-    itemClick(){
-      this.$router.push('/detail'+this.goodsItem.iid)
-    }
-  }
+  methods: {
+    itemClick() {
+      this.$router.push("/detail" + this.goodsItem.iid);
+    },
+  },
 };
 </script>
 
@@ -51,7 +51,7 @@ export default {
   width: 48%;
   margin-top: 10px;
 }
-.goods-item>img {
+.goods-item > img {
   border-radius: 6px 6px 0 0;
   min-height: 267px;
 }

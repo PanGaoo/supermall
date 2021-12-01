@@ -18,7 +18,7 @@
     </div>
     <div class="info-service" v-if="goods.services">
       <span v-for="(item, index) in goods.services.length - 1" :key="index">
-        <img :src="goods.services[index].icon" alt="" />
+        <img v-lazy="goods.services[index].icon" />
         <span>{{ goods.services[index].name }}</span>
       </span>
     </div>

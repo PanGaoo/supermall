@@ -1,10 +1,10 @@
 <template>
-  <div class="swiper">
+  <div class="swiper" v-if="Object.keys(topImages).length != 0">
     <swiper :options="swiperOptions">
       <swiper-slide v-for="(item, index) in topImages" :key="index">
         <div class="lunbo">
           <div class="imgDiv">
-            <img :src="item" alt="" />
+            <img v-lazy="item" />
           </div>
         </div>
       </swiper-slide>
